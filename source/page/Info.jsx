@@ -2,6 +2,7 @@ import React from "react";
 import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
 import Icon from "@material-ui/core/Icon";
+import { Auth } from "./Auth";
 
 const useStyles = makeStyles((theme) => ({
 	button: {
@@ -22,6 +23,7 @@ const IconLabelButtons = () => {
 			>
 				Send
 			</Button>
+			<Auth />
 		</div>
 	);
 };
