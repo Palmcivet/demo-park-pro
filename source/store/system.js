@@ -3,7 +3,7 @@ const initState = {
 	msg: "",
 	lang: 1,
 	color: "#3f51b5",
-	isShow: true,
+	isShow: false,
 };
 
 const type = {

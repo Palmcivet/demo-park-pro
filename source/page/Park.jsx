@@ -11,40 +11,44 @@ const ParkView = (props) => {
 
 	return (
 		<div className="park">
-			{isShow ? (
-				<>
-					<div className="banner">
-						<img src={require("../../static/image/banner.png")}></img>
-					</div>
-					<div className="greeting">
-						{tip.greeting_1[lang]}
-						<br />
-						{tip.greeting_2[lang]}
-					</div>
-					<button
-						className="mdui-btn mdui-btn-raised mdui-ripple"
-						onClick={() => props.toggleShow()}
-						style={{
-							backgroundColor: "#3f51b5",
-							borderRadius: "3px",
-						}}
-					>
-						<div
-							style={{
-								margin: "5px",
-								color: "white",
-								fontSize: "19px",
-								textAlign: "center",
-								fontWeight: "400",
-							}}
-						>
-							{tip.get_order[lang]}
-						</div>
-					</button>
-				</>
-			) : (
-				<Steps {...props} />
-			)}
+			<div className="banner">
+				<img src={require("../../static/image/banner.png")}></img>
+			</div>
+			<div
+				className="greeting"
+				style={{
+					bottom: "240px",
+					transform: isShow ? "translate(-50%, 160px)" : "translateX(-50%)",
+				}}
+			>
+				{tip.greeting_1[lang]}
+				<br />
+				{tip.greeting_2[lang]}
+			</div>
+			<button
+				className="mdui-btn mdui-btn-raised mdui-ripple"
+				onClick={() => props.toggleShow()}
+				style={{
+					backgroundColor: "#3f51b5",
+					borderRadius: "3px",
+					bottom: "130px",
+					transform: isShow ? "translate(-50%, 200px)" : "translateX(-50%)",
+				}}
+			>
+				<div
+					style={{
+						margin: "5px",
+						color: "white",
+						fontSize: "19px",
+						textAlign: "center",
+						fontWeight: "400",
+					}}
+				>
+					{tip.get_order[lang]}
+				</div>
+			</button>
+
+			<Steps {...props} />
 		</div>
 	);
 };

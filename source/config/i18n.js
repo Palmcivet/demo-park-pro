@@ -6,7 +6,7 @@ const nav = {
 
 const tip = {
 	greeting_1: ["Welcome to Park Pro", "欢迎来到 Park Pro"],
-	greeting_2: ['Click "Get Order" please', "请点击“立即预约”开始使用"],
+	greeting_2: ['Click "Get Order" Please', "请点击“立即预约”开始使用"],
 	get_order: ["Get Order", "立即预约"],
 	cancel: ["Cancel", "取消"],
 	confirm: ["Confirm", "确认"],

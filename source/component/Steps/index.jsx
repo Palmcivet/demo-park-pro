@@ -1,14 +1,14 @@
 import React, { useState } from "react";
-import "./style.less";
 import { tip } from "../../config/i18n";
+import "./style.less";
 
 const Steps = (props) => {
-	const { lang, toggleShow } = props;
+	const { lang, toggleShow, isShow } = props;
 	const [count, setCount] = useState(0);
 	mdui.mutation();
 
 	return (
-		<div className="selectbox">
+		<div className="selectbox" style={{ display: isShow ? "initial" : "none" }}>
 			<div className="mdui-progress">
 				<div
 					className="mdui-progress-determinate"
