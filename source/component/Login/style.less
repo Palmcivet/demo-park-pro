@@ -1,0 +1,48 @@
+@import "../../style/index.less";
+
+.mdui-textfield {
+	position: relative;
+	padding-top: 1px;
+	padding-bottom: 26px;
+	overflow: hidden;
+}
+
+.authbox {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	align-items: center;
+	color: @color-main;
+
+	div.textfield {
+		&.signup {
+			height: 240px;
+		}
+		&.login {
+			height: 180px;
+		}
+		width: 140px;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-around;
+		align-items: center;
+	}
+
+	img.logo {
+		margin-top: 100px;
+		width: 120px;
+		height: 120px;
+	}
+
+	div.btn {
+		margin: auto;
+		font-size: 16px;
+	}
+
+	div.tipbox {
+		margin-top: 20px;
+		display: flex;
+		justify-content: space-around;
+		align-items: center;
+	}
+}

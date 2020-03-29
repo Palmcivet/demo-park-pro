@@ -1,62 +1,68 @@
 import React from "react";
-import Paper from "@material-ui/core/Paper";
-import Zoom from "@material-ui/core/Zoom";
-import Button from "@material-ui/core/Button";
-import { makeStyles } from "@material-ui/core/styles";
-import { Step } from "../component/Step";
-import { Auth } from "./Auth";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { tip } from "../config/i18n";
+import { Steps } from "../component/Steps";
+import { selector as authSelector, creator as authCreator } from "../store/auth";
+import { selector as sysSelector, creator as sysCreator } from "../store/system";
 
-const formStyle = makeStyles((theme) => ({
-	button: {
-		margin: theme.spacing(1),
-		bottom: "calc(50px + 80px)",
-		position: "fixed",
-		left: "50%",
-		transform: "translateX(-50%)",
-	},
-}));
-
-const parkStyles = makeStyles((theme) => ({
-	root: {
-		height: 450,
-	},
-	container: {
-		display: "flex",
-	},
-	paper: {
-		margin: theme.spacing(1),
-	},
-}));
-
-// const FormCloze = React.forwardRef((props, ref) => {
-// 	const classes = formStyles();
-
-// 	return (
-// 		<div className={classes.container} ref={ref}>
-// 			<Zoom in={checked}>
-// 				<Paper elevation={4} className={classes.paper}>
-// 					<Step />
-// 				</Paper>
-// 			</Zoom>
-// 		</div>
-// 	);
-// });
-
-const Park = () => {
-	const classes = parkStyles();
-	const ref = React.createRef();
+const ParkView = (props) => {
+	const { lang, isShow } = props;
 
 	return (
-		<Button
-			variant="contained"
-			color="primary"
-			size="large"
-			className={classes.button}
-			// component={FormCloze}
-		>
-			立即预约
-		</Button>
+		<div className="park">
+			{isShow ? (
+				<>
+					<div className="banner">
+						<img src={require("../../static/image/banner.png")}></img>
+					</div>
+					<div className="greeting">
+						{tip.greeting_1[lang]}
+						<br />
+						{tip.greeting_2[lang]}
+					</div>
+					<button
+						className="mdui-btn mdui-btn-raised mdui-ripple"
+						onClick={() => props.toggleShow()}
+						style={{
+							backgroundColor: "#3f51b5",
+							borderRadius: "3px",
+						}}
+					>
+						<div
+							style={{
+								margin: "5px",
+								color: "white",
+								fontSize: "19px",
+								textAlign: "center",
+								fontWeight: "400",
+							}}
+						>
+							{tip.get_order[lang]}
+						</div>
+					</button>
+				</>
+			) : (
+				<Steps {...props} />
+			)}
+		</div>
 	);
 };
+
+const mapStateToProps = (state) => {
+	return {
+		lang: sysSelector.getLang(state),
+		isShow: sysSelector.getShow(state),
+	};
+};
+
+const mapDispatchToProps = (dispatch) => {
+	return {
+		...bindActionCreators(authCreator, dispatch),
+		...bindActionCreators(sysCreator, dispatch),
+	};
+};
+
+const Park = connect(mapStateToProps, mapDispatchToProps)(ParkView);
 
 export { Park };

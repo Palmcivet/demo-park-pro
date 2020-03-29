@@ -4,6 +4,14 @@ const nav = {
 	info: ["Info", "我的"],
 };
 
+const tip = {
+	greeting_1: ["Welcome to Park Pro", "欢迎来到 Park Pro"],
+	greeting_2: ['Click "Get Order" please', "请点击“立即预约”开始使用"],
+	get_order: ["Get Order", "立即预约"],
+	cancel: ["Cancel", "取消"],
+	confirm: ["Confirm", "确认"],
+};
+
 const auth = {
 	name: ["Name", "名称"],
 	email: ["Email", "邮件"],
@@ -11,10 +19,12 @@ const auth = {
 	signup: ["Signup", "注册"],
 	login: ["Signin", "登录"],
 	logout: ["Logout", "注销"],
-	forget: ["Forget password", "忘记密码"],
-	empty_name: ["Empty name", "用户名不能为空"],
+	forget_passwd: ["Forget password?", "忘记密码？"],
+	no_account: ["No account?", "没有账号？"],
+	empty_name: ["Empty name", "用户名为空"],
+	empty_passwd: ["Empty password", "密码为空"],
 	invalid_email: ["Invalid email", "格式错误"],
 	error: ["Login failed", "登录失败"],
 };
 
-export { nav, auth };
+export { nav, tip, auth };

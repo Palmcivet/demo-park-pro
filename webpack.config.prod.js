@@ -40,24 +40,6 @@ module.exports = {
 						plugins: [
 							"@babel/plugin-proposal-class-properties",
 							"react-hot-loader/babel",
-							[
-								"babel-plugin-import",
-								{
-									libraryName: "@material-ui/core",
-									libraryDirectory: "esm",
-									camel2DashComponentName: false,
-								},
-								"core",
-							],
-							[
-								"babel-plugin-import",
-								{
-									libraryName: "@material-ui/icons",
-									libraryDirectory: "esm",
-									camel2DashComponentName: false,
-								},
-								"icons",
-							],
 						],
 					},
 				},
@@ -70,8 +52,10 @@ module.exports = {
 				test: /\.(png|jpg|jpeg|svg|gif|mp3|eot|woff|woff2|ttf)([\\?]?.*)$/,
 				loader: "file-loader",
 				options: {
-					name: "[hash].[ext]",
+					esModule: false,
+					name: "[hash:5].[ext]",
 					publicPath: "./assets",
+					outputPath: "./assets",
 				},
 			},
 		],

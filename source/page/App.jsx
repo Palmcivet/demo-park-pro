@@ -1,59 +1,66 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import BottomNavigation from "@material-ui/core/BottomNavigation";
-import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
-import ParkCar from "@material-ui/icons/LocalParking";
-import TakeCar from "@material-ui/icons/DriveEta";
-import MyInfo from "@material-ui/icons/PermIdentityOutlined";
-import { nav } from "../config/i18n";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { BrowserRouter, Redirect, Route } from "react-router-dom";
 import { Info } from "./Info";
 import { Park } from "./Park";
 import { Take } from "./Take";
+import { Auth } from "./Auth";
+import { nav } from "../config/i18n";
+import { selector as authSelector, creator as authCreator } from "../store/auth";
+import { selector as sysSelector, creator as sysCreator } from "../store/system";
 
-const useStyles = makeStyles({
-	root: {
-		width: "100vw",
-		height: "50px",
-		bottom: 0,
-		position: "fixed",
-	},
-});
-
-const App = () => {
-	const lang = 1;
-	const classes = useStyles();
+const Navbar = (props) => {
+	const { lang } = props;
 	const [value, setValue] = React.useState(1);
 
 	return (
 		<>
 			{value === 1 ? <Park /> : value === 2 ? <Take /> : <Info />}
-
-			<BottomNavigation
-				value={value}
-				onChange={(event, newValue) => {
-					setValue(newValue);
-				}}
-				showLabels
-				className={classes.root}
-			>
-				<BottomNavigationAction
-					label={nav.park[lang]}
-					value={1}
-					icon={<ParkCar />}
-				/>
-				<BottomNavigationAction
-					label={nav.take[lang]}
-					value={2}
-					icon={<TakeCar />}
-				/>
-				<BottomNavigationAction
-					label={nav.info[lang]}
-					value={3}
-					icon={<MyInfo />}
-				/>
-			</BottomNavigation>
+			<div className="mdui-bottom-nav navbar">
+				<a className="mdui-bottom-nav-active" onClick={() => setValue(1)}>
+					<i className="mdui-icon material-icons">local_parking</i>
+					<label>{nav.park[lang]}</label>
+				</a>
+				<a onClick={() => setValue(2)}>
+					<i className="mdui-icon material-icons">directions_car</i>
+					<label>{nav.take[lang]}</label>
+				</a>
+				<a onClick={() => setValue(3)}>
+					<i className="mdui-icon material-icons">perm_identity</i>
+					<label>{nav.info[lang]}</label>
+				</a>
+			</div>
 		</>
 	);
 };
+
+const AppView = (props) => {
+	const { lang, status } = props;
+
+	return (
+		<BrowserRouter>
+			{/* for debug */}
+			{status ? <Redirect to="/auth" /> : <Redirect to="/" />}
+			<Route path="/" exact render={() => <Navbar lang={lang} />} />
+			<Route path="/auth" render={() => <Auth />} />
+		</BrowserRouter>
+	);
+};
+
+const mapStateToProps = (state, props) => {
+	return {
+		lang: sysSelector.getLang(state),
+		status: authSelector.getSatus(state),
+	};
+};
+
+const mapDispatchToProps = (dispatch) => {
+	return {
+		...bindActionCreators(authCreator, dispatch),
+	};
+};
+
+const App = connect(mapStateToProps, mapDispatchToProps)(AppView);
 
 export { App };
