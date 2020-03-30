@@ -15,6 +15,8 @@ div.navbar {
 	height: 50px;
 	bottom: 0;
 	position: fixed;
+	box-shadow: 0 -1px 7px rgba(0, 0, 0, 0.12);
+	z-index: 99;
 }
 
 div.park {
@@ -22,16 +24,24 @@ div.park {
 
 	.banner {
 		width: 340px;
-		margin-top: 50px;
+		margin-top: 70px;
 		left: 50%;
 		position: absolute;
-		transform: translateX(-50%);
+		transition-property: all;
+		transition-duration: 0.4s;
 		box-shadow: 0 3px 4px 2px rgba(0, 0, 0, 0.12);
 
 		img {
 			margin: 10px;
 			width: 320px;
 		}
+	}
+
+	div .bg {
+		position: absolute;
+		object-fit: fill;
+		width: 100vh;
+		filter: blur(5px);
 	}
 
 	.greeting {
@@ -47,10 +57,9 @@ div.park {
 
 	button {
 		height: auto;
-		position: absolute;
-		left: 50%;
-		border-radius: 3px;
+		border-radius: 2px;
 		transition-property: all;
 		transition-duration: 0.4s;
+		z-index: 1;
 	}
 }

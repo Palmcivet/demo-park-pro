@@ -11,19 +11,25 @@ const ParkView = (props) => {
 
 	return (
 		<div className="park">
-			<div className="banner">
+			<div
+				className="banner"
+				style={{
+					transform: isShow ? "translate(-50%, -300px)" : "translateX(-50%)",
+				}}
+			>
 				<img src={require("../../static/image/banner.png")}></img>
 			</div>
 			<div
 				className="greeting"
 				style={{
-					bottom: "240px",
+					bottom: "260px",
 					transform: isShow ? "translate(-50%, 160px)" : "translateX(-50%)",
 				}}
 			>
-				{tip.greeting_1[lang]}
+				<Steps {...props} />
+				{isShow ? tip.greeting_3[lang] : tip.greeting_1[lang]}
 				<br />
-				{tip.greeting_2[lang]}
+				{isShow ? null : tip.greeting_2[lang]}
 			</div>
 			<button
 				className="mdui-btn mdui-btn-raised mdui-ripple"
@@ -31,7 +37,9 @@ const ParkView = (props) => {
 				style={{
 					backgroundColor: "#3f51b5",
 					borderRadius: "3px",
-					bottom: "130px",
+					bottom: "140px",
+					left: "50%",
+					position: "absolute",
 					transform: isShow ? "translate(-50%, 200px)" : "translateX(-50%)",
 				}}
 			>
@@ -47,8 +55,6 @@ const ParkView = (props) => {
 					{tip.get_order[lang]}
 				</div>
 			</button>
-
-			<Steps {...props} />
 		</div>
 	);
 };

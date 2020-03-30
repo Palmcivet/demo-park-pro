@@ -1,9 +1,10 @@
-import { post, url } from "../api/auth";
+import { post, url } from "../util/post";
 
 const initState = {
 	name: "",
 	email: "",
 	balance: 0.0,
+	error: "",
 };
 
 const type = {
@@ -31,7 +32,7 @@ const creator = {
 				username,
 				password,
 			};
-			return post(url.other, postData).then((data) =>
+			return post(url.login, postData).then((data) =>
 				dispatch(creator.setInfo(data))
 			);
 		};
@@ -39,7 +40,7 @@ const creator = {
 	logout: () => ({ type: type.LOGOUT }),
 	setInfo: (data) => {
 		if (data.code !== 200) {
-			return { type: type.ERROR };
+			return { type: type.ERROR, error: "登录失败" };
 		} else {
 			return {
 				type: type.SETINFO,

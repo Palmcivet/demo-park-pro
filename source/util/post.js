@@ -4,6 +4,12 @@ const url = {
 	other: "/api/verifytoken",
 };
 
+const apiType = {
+	feedback: "add_letter",
+	get_order: "get_order",
+	add_order: "add_order",
+};
+
 const headers = new Headers({
 	Accept: "application/json",
 	"Content-Type": "application/json",
@@ -11,10 +17,10 @@ const headers = new Headers({
 });
 
 const handleResponse = (response) => {
-	if (response.status < 500) {
+	if (response.status < 400) {
 		return response.json();
 	} else {
-		console.error(`Request failed. Message = ${response.statusText}`);
+		console.error(`Server error: ${response.statusText}`);
 		return { error: { msg: "Server error." } };
 	}
 };
@@ -28,8 +34,8 @@ const post = (url, data) =>
 	})
 		.then((response) => handleResponse(response))
 		.catch((err) => {
-			console.error(`Request failed. Message = ${err}`);
-			return { error: { msg: "Request failed." } };
+			console.error(`Nerwork failed: ${err}`);
+			return { error: { msg: "Request error." } };
 		});
 
-export { url, post };
+export { apiType, url, post };
