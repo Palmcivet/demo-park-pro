@@ -22,10 +22,21 @@ const InfoView = (props) => {
 			<div className="body">
 				<div className="card up">
 					<i className="mdui-icon material-icons">account_balance_wallet</i>
-					<span>{sys.balance[lang]}</span>
+					<span>{sys.rest[lang]}</span>
 					<Link to="/recharge">
 						{/* 字符串格式，"81.02" "34" */}
-						{balance}
+						<label>¥</label>
+						<label>
+							{balance.indexOf(".") === -1
+								? balance
+								: balance.slice(0, balance.indexOf("."))}
+						</label>
+						<label>
+							.{/* 字符串 -> 数值(精度 2) -> 字符串("."') */}
+							{parseFloat(balance)
+								.toFixed(2)
+								.slice(balance.indexOf(".") + 1)}
+						</label>
 					</Link>
 				</div>
 				<div className="card mid">

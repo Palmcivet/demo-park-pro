@@ -16,6 +16,8 @@ const TakeView = (props) => {
 					top: "50%",
 					transform: "translate(-50%,-50%)",
 					fontSize: "25px",
+					textAlign: "center",
+					wordBreak: "break-word",
 				}}
 			>
 				<div>{lang === 1 ? "该功能尚未开通" : "Your Car was Gone"}</div>

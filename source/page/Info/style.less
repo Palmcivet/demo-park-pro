@@ -1,9 +1,11 @@
+@import "../style.less";
+
 div.info {
 	div.head {
 		height: 160px;
 		padding: 50px;
 		color: white;
-		background-color: #3f51b5;
+		background-color: @color-main;
 		display: flex;
 		flex-direction: column;
 		word-wrap: break-word;
@@ -20,9 +22,9 @@ div.info {
 	}
 
 	div.body {
-		@width: 280px;
-		@left-1: 20%;
-		@left-2: 35%;
+		@width: 290px;
+		@left-1: 17%;
+		@left-2: 30%;
 		@right: 20%;
 
 		font-size: 18px;
@@ -66,8 +68,26 @@ div.info {
 			}
 
 			a {
-				right: @right;
-				color: #3f51b5;
+				right: @right - 12%;
+				height: 50px;
+				width: 85px;
+				color: @color-main;
+				display: flex;
+				font-size: 30px;
+				align-items: center;
+
+				label {
+					cursor: pointer;
+				}
+
+				label:first-child {
+					font-size: 18px;
+				}
+
+				label:last-child {
+					font-size: 18px;
+					align-self: flex-start;
+				}
 			}
 		}
 

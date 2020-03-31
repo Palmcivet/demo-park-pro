@@ -8,6 +8,7 @@ import { Lang } from "../../component/Lang";
 import { selector as authSelector, creator as authCreator } from "../../store/auth";
 import { selector as sysSelector, creator as sysCreator } from "../../store/system";
 const logo = require("../../../static/meta/logo.png");
+import "./style.less";
 
 const AuthView = (props) => {
 	const { lang, status, setLang } = props;
@@ -25,19 +26,15 @@ const AuthView = (props) => {
 				<>
 					<Login {...props} />
 					<div className="tipbox">
-						<a className="base">{auth.forget_passwd[lang]}</a>
-						<a className="base" onClick={() => setIsSign(!isSign)}>
-							{auth.no_account[lang]}
-						</a>
+						<a>{auth.forget_passwd[lang]}</a>
+						<a onClick={() => setIsSign(!isSign)}>{auth.no_account[lang]}</a>
 					</div>
 				</>
 			) : (
 				<>
 					<Singup {...props} />
 					<div className="tipbox">
-						<a className="base" onClick={() => setIsSign(!isSign)}>
-							{tip.cancel[lang]}
-						</a>
+						<a onClick={() => setIsSign(!isSign)}>{tip.cancel[lang]}</a>
 					</div>
 				</>
 			)}

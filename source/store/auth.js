@@ -6,7 +6,7 @@ import { notify } from "../util/i18n";
 const initState = {
 	name: "Developer",
 	email: "googleMSapple@gmail.com",
-	balance: "0.00",
+	balance: "3435.05",
 };
 
 const type = {

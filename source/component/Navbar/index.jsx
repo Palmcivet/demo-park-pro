@@ -7,7 +7,7 @@ import "./style.less";
 
 const Navbar = (props) => {
 	const { lang } = props;
-	const [value, setValue] = React.useState(3);
+	const [value, setValue] = React.useState(1);
 
 	return (
 		<>
