@@ -4,7 +4,7 @@ const sys = {
 	info: ["Info", "我的"],
 	balance: ["Balance: ", "钱包余额："],
 	bill: ["Your Bill", "历史订单"],
-	feedback: ["Feedback", "咨询客服"],
+	feedback: ["Feed Back", "咨询客服"],
 	about: ["About Us", "关于我们"],
 	recharge: ["Recharge", "充值"],
 };

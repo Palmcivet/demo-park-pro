@@ -1,8 +1,4 @@
 div.info {
-	button {
-		color: #f73d16;
-	}
-
 	div.head {
 		height: 160px;
 		padding: 50px;
@@ -10,6 +6,7 @@ div.info {
 		background-color: #3f51b5;
 		display: flex;
 		flex-direction: column;
+		word-wrap: break-word;
 
 		& > label:first-child {
 			font-size: 26px;
@@ -22,43 +19,63 @@ div.info {
 		}
 	}
 
-	.body {
-		font-size: 16px;
+	div.body {
+		@width: 280px;
+		@left-1: 20%;
+		@left-2: 35%;
+		@right: 20%;
+
+		font-size: 18px;
 		height: calc(100vh - 50px - 260px);
 		display: grid;
-		grid-template-rows: repeat(4, 1fr) 70px;
+		grid-template-rows: 100px repeat(3, 1fr) 0.6fr;
 		grid-column-gap: 0px;
 		grid-row-gap: 0px;
 		place-content: center;
 
 		a {
-			width: 100%;
 			color: #000000db;
 			text-decoration: none;
 		}
 
 		.up {
-			padding: 20px 0;
-			width: 300px;
+			width: @width;
+			height: 80px;
 			text-align: center;
+			position: relative;
 			align-self: end;
 			grid-row-start: 1;
 			grid-row-end: 2;
 			grid-column-start: 1;
 			grid-column-end: 2;
 
+			span,
+			i,
 			a {
-				font-size: 14px;
+				position: absolute;
+				top: 50%;
+				transform: translateY(-50%);
+			}
+
+			i {
+				left: @left-1;
+			}
+
+			span {
+				left: @left-2;
+			}
+
+			a {
+				right: @right;
 				color: #3f51b5;
 			}
 		}
 
 		.mid {
-			width: 300px;
-			height: 180px;
+			width: @width;
+			height: calc(100% - 60px);
 			display: flex;
 			flex-direction: column;
-			align-items: center;
 			justify-content: center;
 			align-self: center;
 			grid-row-start: 2;
@@ -68,24 +85,52 @@ div.info {
 
 			a {
 				text-align: center;
-			}
+				position: relative;
+				height: 50px;
 
-			.card-feedback {
-				border-top: solid 1px;
-				border-bottom: solid 1px;
+				span {
+					position: absolute;
+					top: 50%;
+					left: @left-2;
+					transform: translateY(-50%);
+				}
+
+				i {
+					position: absolute;
+					top: 50%;
+					transform: translateY(-50%);
+
+					&:first-child {
+						left: @left-1;
+					}
+
+					&:last-child {
+						right: @right;
+					}
+				}
 			}
 		}
 
 		.down {
-			width: 300px;
+			width: @width;
 			height: 50px;
-			text-align: center;
-			font-size: 14px;
 			align-self: start;
 			grid-row-start: 5;
 			grid-row-end: 6;
 			grid-column-start: 1;
 			grid-column-end: 2;
+			text-align: center;
+
+			button {
+				font-size: 16px;
+				color: #f73d16;
+				cursor: pointer;
+				background-color: #ffffff00;
+				text-transform: uppercase;
+				text-decoration: none;
+				border-style: none;
+				margin: 10px;
+			}
 		}
 	}
 }
