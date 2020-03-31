@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import { tip, park } from "../../util/i18n";
+import { Link } from "react-router-dom";
+import { tip, park, sys, notify } from "../../util/i18n";
 import { post, url, apiType } from "../../util/post";
 import "./style.less";
 
 const Steps = (props) => {
-	const { lang, toggleShow, isShow } = props;
+	const { lang, isShow, balance, toggleShow, setError } = props;
 	const [count, setCount] = useState(1);
 	const [time, setTime] = useState("1");
 	const [size, setSize] = useState(park.model.small[lang]);
@@ -12,7 +13,7 @@ const Steps = (props) => {
 
 	return (
 		<div className="selectbox" style={{ display: isShow ? "flex" : "none" }}>
-			<div style={{ width: "100%" }}>
+			<div className="progress">
 				<div
 					className="mdui-progress"
 					style={{ margin: "10px 0", height: "5px" }}
@@ -22,23 +23,24 @@ const Steps = (props) => {
 						style={{ width: (((count - 1) / 3) * 100).toString() + "%" }}
 					></div>
 				</div>
-				<label style={{ margin: "10px 0" }}>{count} / 4</label>
+				<label className="indicate">{count} / 4</label>
 			</div>
 
+			{/* 填表 */}
 			<div
 				style={{ display: count === 1 ? "inherit" : "none" }}
 				className="dialog-1"
 			>
-				<div className="prompt-1">
+				<div>
 					{park.prompt.intro[lang]}
 					<br />
-					L&lt;3.7m 🚘 W&lt;1.8m
+					L&lt;3.7m 🚗 W&lt;1.8m
 					<br />
 					3.7m&lt;L&lt;5.0m 🚐 1.8m&lt;W&lt;2.0m
 					<br />
 					5.0m&lt;L&lt;3.7m 🚜 2.0m&lt;W&lt;2.5m
 				</div>
-				<div style={{ marginTop: "10px" }}>
+				<div style={{ marginTop: "18px" }}>
 					<label>{park.prompt.choose_model[lang]}</label>
 					<select className="mdui-select" mdui-select="{position: 'top'}">
 						<option value="1">{park.model.small[lang]}</option>
@@ -46,7 +48,7 @@ const Steps = (props) => {
 						<option value="3">{park.model.large[lang]}</option>
 					</select>
 				</div>
-				<div style={{ marginTop: "10px" }}>
+				<div style={{ marginTop: "8px" }}>
 					<label>{park.prompt.choose_time_t[lang]}</label>
 					<select className="mdui-select" mdui-select="{position: 'bottom'}">
 						<option value="1">1</option>
@@ -57,39 +59,41 @@ const Steps = (props) => {
 					<label>{park.prompt.choose_time_u[lang]}</label>
 				</div>
 			</div>
+			{/* 确认、支付 */}
 			<div
 				style={{ display: count === 2 ? "inherit" : "none" }}
 				className="dialog-2"
 			>
-				<div></div>
-				{park.prompt.choose_model[lang]}
-				{size}
-				<br />
-				{park.prompt.choose_time_t[lang]}
-				{time + " "}
-				{park.prompt.choose_time_u[lang]}
+				<label>{park.prompt.confirm[lang]}</label>
+				<ul className="mdui-list">
+					<li className="mdui-list-item mdui-ripple">
+						🚘{park.prompt.choose_model[lang]}
+						{size}
+					</li>
+					<li className="mdui-list-item mdui-ripple">
+						⏰{park.prompt.choose_time_t[lang]}
+						{time + " "}
+						{park.prompt.choose_time_u[lang]}
+					</li>
+				</ul>
+				<label className="balance">
+					{sys.balance[lang]}
+					{parseFloat(balance).toFixed(2)}
+				</label>
+				<Link to="/recharge">{sys.recharge[lang]}</Link>
 			</div>
-			<div
-				style={{ display: count === 3 ? "inherit" : "none" }}
-				className="dialog-3"
-			>
-				{/* 等待 */}
-			</div>
-			<div
-				style={{ display: count === 4 ? "inherit" : "none" }}
-				className="dialog-4"
-			>
-				{/* 结果 */}
-			</div>
-			<div style={{ display: count === 3 ? "inherit" : "none" }} className="spin">
+			{/* 等待 */}
+			<div style={{ display: count === 3 ? "flex" : "none" }} className="dialog-3">
+				<label>{park.prompt.please_wait[lang]}</label>
 				<div
 					className="mdui-spinner"
-					style={{
-						width: "40px",
-						height: "40px",
-						display: count > 3 ? "inherit" : "none",
-					}}
+					style={{ display: count === 3 ? "inherit" : "none" }}
 				></div>
+			</div>
+			{/* 结果 */}
+			<div style={{ display: count === 4 ? "flex" : "none" }} className="dialog-4">
+				<label>{park.prompt.get_note[lang]}</label>
+				<div>{}</div>
 			</div>
 
 			<div className="btngroup">
@@ -111,38 +115,56 @@ const Steps = (props) => {
 				<button
 					className="mdui-btn mdui-ripple"
 					onClick={() => {
-						if (count === 1) {
-							setSize(
-								document.getElementsByClassName("mdui-select-selected")[0]
-									.innerHTML
-							);
-							setTime(
-								document.getElementsByClassName("mdui-select-selected")[1]
-									.innerHTML
-							);
-							setCount(count + 1);
-						} else if (count === 2) {
-							post(url.other, {
-								token: localStorage.getItem("token"),
-								require: apiType.get_order,
-								car_size,
-								time,
-							}).then((data) => {
-								if (data.code !== 200) {
-									console.log("操作失败");
-								} else {
-									setCount(count + 1);
-								}
-							});
-						} else if (count === 4) {
-							toggleShow();
-							setCount(1);
-						} else {
-							setCount(count + 1);
+						mdui.mutation();
+						switch (count) {
+							case 1:
+								setSize(
+									document.getElementsByClassName(
+										"mdui-select-selected"
+									)[0].innerHTML
+								);
+								setTime(
+									document.getElementsByClassName(
+										"mdui-select-selected"
+									)[1].innerHTML
+								);
+								setCount(count + 1);
+								break;
+							case 2:
+								post(url.other, {
+									token: localStorage.getItem("token"),
+									require: apiType.get_order,
+									car_size: size,
+									time: time,
+								}).then((data) => {
+									if (data.status === 1) {
+										setCount(count + 1);
+									} else if (data.code !== 200) {
+										//* Debug
+										setCount(count + 1);
+										// TODO: 逻辑不清
+										setError(notify.pay_failed[lang]);
+									}
+								});
+								break;
+							case 3:
+								break;
+							case 4:
+								toggleShow();
+								setCount(1);
+								break;
+							default:
+								break;
 						}
 					}}
 				>
-					<div>{count === 2 ? tip.confirm[lang] : tip.next[lang]}</div>
+					<div>
+						{count === 2
+							? tip.get_order[lang]
+							: count === 3
+							? tip.wait[lang]
+							: tip.next[lang]}
+					</div>
 				</button>
 			</div>
 		</div>

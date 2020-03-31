@@ -4,7 +4,7 @@ import { reducer as systemReducer } from "./system";
 
 const rootReducers = combineReducers({
 	auth: authReducer,
-	system: systemReducer,
+	sys: systemReducer,
 });
 
 export { rootReducers };

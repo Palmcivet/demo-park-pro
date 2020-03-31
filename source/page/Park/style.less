@@ -1,23 +1,4 @@
-html,
-body {
-	overflow: hidden;
-	font-family: Arial, Helvetica, sans-serif;
-}
-
-@color-main: #3f51b5;
-
-a.base {
-	cursor: pointer;
-}
-
-div.navbar {
-	width: 100vw;
-	height: 50px;
-	bottom: 0;
-	position: fixed;
-	box-shadow: 0 -1px 7px rgba(0, 0, 0, 0.12);
-	z-index: 99;
-}
+@import "../style.less";
 
 div.park {
 	height: calc(100vh - 50px);
@@ -35,13 +16,6 @@ div.park {
 			margin: 10px;
 			width: 320px;
 		}
-	}
-
-	div .bg {
-		position: absolute;
-		object-fit: fill;
-		width: 100vh;
-		filter: blur(5px);
 	}
 
 	.greeting {

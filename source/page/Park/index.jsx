@@ -1,10 +1,12 @@
 import React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { tip } from "../config/i18n";
-import { Steps } from "../component/Steps";
-import { selector as authSelector, creator as authCreator } from "../store/auth";
-import { selector as sysSelector, creator as sysCreator } from "../store/system";
+import { tip } from "../../util/i18n";
+import { Steps } from "../../component/Steps";
+import { selector as authSelector, creator as authCreator } from "../../store/auth";
+import { selector as sysSelector, creator as sysCreator } from "../../store/system";
+const banner = require("../../../static/image/banner.png");
+import "./style.less";
 
 const ParkView = (props) => {
 	const { lang, isShow } = props;
@@ -17,7 +19,7 @@ const ParkView = (props) => {
 					transform: isShow ? "translate(-50%, -300px)" : "translateX(-50%)",
 				}}
 			>
-				<img src={require("../../static/image/banner.png")}></img>
+				<img src={banner}></img>
 			</div>
 			<div
 				className="greeting"
@@ -62,6 +64,7 @@ const ParkView = (props) => {
 const mapStateToProps = (state) => {
 	return {
 		lang: sysSelector.getLang(state),
+		balance: authSelector.getBalance(state),
 		isShow: sysSelector.getShow(state),
 	};
 };

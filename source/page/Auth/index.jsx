@@ -1,15 +1,16 @@
 import React, { useState } from "react";
-import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Login } from "../component/Login/Login";
-import { Singup } from "../component/Login/Signup";
-import { auth, tip } from "../config/i18n";
-import { selector as authSelector, creator as authCreator } from "../store/auth";
-import { selector as sysSelector, creator as sysCreator } from "../store/system";
-const logo = require("../../static/meta/logo.png");
+import { connect } from "react-redux";
+import { auth, tip } from "../../util/i18n";
+import { Singup } from "../../component/Login/Signup";
+import { Login } from "../../component/Login/Login";
+import { Lang } from "../../component/Lang";
+import { selector as authSelector, creator as authCreator } from "../../store/auth";
+import { selector as sysSelector, creator as sysCreator } from "../../store/system";
+const logo = require("../../../static/meta/logo.png");
 
 const AuthView = (props) => {
-	const { lang, status } = props;
+	const { lang, status, setLang } = props;
 	const [isSign, setIsSign] = useState(true);
 
 	if (status) {
@@ -19,6 +20,7 @@ const AuthView = (props) => {
 	return (
 		<div className="authbox">
 			<img className="logo" src={logo}></img>
+			<Lang lang={lang} offColor="rgb(77, 77, 77)" toggle={setLang} />
 			{isSign ? (
 				<>
 					<Login {...props} />
@@ -43,7 +45,7 @@ const AuthView = (props) => {
 	);
 };
 
-const mapStateToProps = (state, props) => {
+const mapStateToProps = (state) => {
 	return {
 		lang: sysSelector.getLang(state),
 		status: authSelector.getSatus(state),
@@ -53,6 +55,7 @@ const mapStateToProps = (state, props) => {
 const mapDispatchToProps = (dispatch) => {
 	return {
 		...bindActionCreators(authCreator, dispatch),
+		...bindActionCreators(sysCreator, dispatch),
 	};
 };
 

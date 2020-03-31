@@ -1,14 +1,15 @@
 import { post, url } from "../util/post";
+import { rootStore } from "./configuration";
+import { creator as sysCreator } from "../store/system";
+import { notify } from "../util/i18n";
 
 const initState = {
-	name: "",
-	email: "",
-	balance: 0.0,
-	error: "",
+	name: "Developer",
+	email: "googleMSapple@gmail.com",
+	balance: "0.00",
 };
 
 const type = {
-	ERROR: "ERROR",
 	LOGOUT: "LOGOUT",
 	SETINFO: "SETINFO",
 };
@@ -16,31 +17,25 @@ const type = {
 const creator = {
 	signup: (username, email, password) => {
 		return (dispatch) => {
-			const postData = {
+			return post(url.signup, {
 				username,
 				email,
 				password,
-			};
-			return post(url.signup, postData).then((data) =>
-				dispatch(creator.setInfo(data))
-			);
+			}).then((data) => dispatch(creator.setInfo(data)));
 		};
 	},
 	login: (username, password) => {
 		return (dispatch) => {
-			const postData = {
+			return post(url.login, {
 				username,
 				password,
-			};
-			return post(url.login, postData).then((data) =>
-				dispatch(creator.setInfo(data))
-			);
+			}).then((data) => dispatch(creator.setInfo(data)));
 		};
 	},
 	logout: () => ({ type: type.LOGOUT }),
 	setInfo: (data) => {
 		if (data.code !== 200) {
-			return { type: type.ERROR, error: "登录失败" };
+			rootStore.dispatch(sysCreator.setError(notify.login_failed));
 		} else {
 			return {
 				type: type.SETINFO,
@@ -53,7 +48,7 @@ const creator = {
 const reducer = (state = initState, action) => {
 	switch (action.type) {
 		case type.LOGOUT:
-			return { ...state, name: "", email: "", balance: 0.0 };
+			return { ...state, name: "", email: "", balance: "0.00" };
 		case type.SETINFO:
 			localStorage.setItem("token", action.data.token);
 			return {
@@ -69,6 +64,9 @@ const reducer = (state = initState, action) => {
 
 const selector = {
 	getSatus: (state) => (state.auth.email === "" ? false : true),
+	getName: (state) => state.auth.name,
+	getEmail: (state) => state.auth.email,
+	getBalance: (state) => state.auth.balance,
 };
 
 export { initState, type, creator, reducer, selector };

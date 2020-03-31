@@ -1,4 +1,4 @@
-@import "../../style/index.less";
+@import "../../page/style.less";
 
 div.selectbox {
 	box-shadow: 0 11px 15px -7px rgba(0, 0, 0, 0.2), 0 24px 38px 3px rgba(0, 0, 0, 0.14),
@@ -16,37 +16,68 @@ div.selectbox {
 	flex-direction: column;
 	align-items: center;
 
-	.dialog-1,
-	.dialog-3,
-	.dialog-2,
-	.dialog-4 {
-		height: 100%;
-	}
+	& > .progress {
+		width: 100%;
 
-	.dialog-1 {
-		display: flex;
-		align-items: center;
-		flex-direction: column;
-		justify-content: center;
-
-		div {
-			&.prompt-1 {
-				font-size: 14px;
-				align-self: flex-start;
-				padding: 15px;
-				border-radius: 3px;
-				margin-bottom: 8px;
-				box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2),
-					0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
-			}
-
-			label {
-				padding-top: 4px;
-			}
+		& ~ .indicate {
+			margin: 10px 0;
 		}
 	}
 
-	div.btngroup {
+	.dialog-1,
+	.dialog-2,
+	.dialog-3,
+	.dialog-4 {
+		height: 100%;
+		display: flex;
+		justify-content: center;
+		flex-direction: column;
+	}
+
+	.dialog-1 {
+		div:first-child {
+			font-size: 14px;
+			align-self: flex-start;
+			padding: 15px;
+			border-radius: 3px;
+			box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14),
+				0 1px 5px 0 rgba(0, 0, 0, 0.12);
+		}
+	}
+
+	.dialog-2 {
+		.balance {
+			padding: 5px;
+			border-radius: 3px;
+			border-style: dashed;
+			border-width: 2px;
+			border-color: #888b96;
+			background-color: #d8dcf0;
+		}
+
+		a {
+			width: 80px;
+			align-self: center;
+			margin-top: 10px;
+			font-size: 14px;
+			color: @color-main;
+			text-decoration: none;
+		}
+	}
+
+	.dialog-3 {
+		label {
+			margin: 0 0 60px 0;
+		}
+
+		div:last-child {
+			width: 40px;
+			height: 40px;
+			align-self: center;
+		}
+	}
+
+	.btngroup {
 		color: @color-main;
 		display: flex;
 		justify-content: space-around;

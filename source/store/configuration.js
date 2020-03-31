@@ -23,4 +23,6 @@ const configureStore = (initialState) => {
 	return store;
 };
 
-export { configureStore };
+const rootStore = configureStore();
+
+export { rootStore };

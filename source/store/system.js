@@ -1,9 +1,9 @@
 const initState = {
-	err: "",
-	msg: "",
 	lang: 1,
-	color: "#3f51b5",
+	error: "",
+	notify: "",
 	isShow: false,
+	color: "#3f51b5",
 };
 
 const type = {
@@ -31,7 +31,7 @@ const reducer = (state = initState, action) => {
 		case type.SET_COLOR:
 			return { ...state, color: action.color };
 		case type.SET_ERROR:
-			return { ...state, err: action.error };
+			return { ...state, error: action.error[action.lang] };
 		case type.SET_NOTIFY:
 			return state;
 		default:
@@ -40,8 +40,8 @@ const reducer = (state = initState, action) => {
 };
 
 const selector = {
-	getLang: (state) => state.system.lang,
-	getShow: (state) => state.system.isShow,
+	getLang: (state) => state.sys.lang,
+	getShow: (state) => state.sys.isShow,
 };
 
 export { creator, reducer, selector };

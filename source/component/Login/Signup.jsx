@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { auth } from "../../config/i18n";
+import { auth } from "../../util/i18n";
 import "./style.less";
 
 const Singup = (props) => {

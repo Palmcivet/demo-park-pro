@@ -10,7 +10,7 @@ module.exports = {
 	entry: path.join(ENTRY, "index.jsx"),
 	devtool: "source-map",
 	output: {
-		filename: "index.bundle.js",
+		filename: "index.js",
 		path: path.join(OUTPUT, "build"),
 	},
 	resolve: {
@@ -21,7 +21,7 @@ module.exports = {
 		new HtmlWebpackPlugin({
 			template: path.join(STATIC, "index.html"),
 			path: path.join(OUTPUT, "dist"),
-			filename: "index.bundle.html",
+			filename: "index.html",
 		}),
 	],
 	devServer: {
