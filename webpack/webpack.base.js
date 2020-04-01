@@ -1,31 +1,30 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
-const ENTRY = path.join(__dirname, "source");
-const OUTPUT = path.join(__dirname, "public");
-const STATIC = path.join(__dirname, "static");
+const ENTRY = path.join(__dirname, "../", "source");
+const OUTPUT = path.join(__dirname, "../", "public");
+const STATIC = path.join(__dirname, "../", "static");
 
 module.exports = {
-	mode: "production",
 	entry: path.join(ENTRY, "index.jsx"),
 	output: {
-		path: path.join(OUTPUT),
-		filename: "js/index.js",
+		path: OUTPUT,
+		filename: "script/index.js",
 	},
 	resolve: {
-		extensions: [".js", ".jsx"],
+		extensions: [".ts", ".tsx", ".js", ".jsx"],
 		modules: [ENTRY, "node_modules"],
 	},
 	plugins: [
 		new HtmlWebpackPlugin({
 			template: path.join(STATIC, "index.html"),
-			filename: "index.html",
 			path: OUTPUT,
+			filename: "index.html",
 		}),
 		new HtmlWebpackPlugin({
 			template: path.join(STATIC, "index.html"),
-			filename: "404.html",
 			path: OUTPUT,
+			filename: "404.html",
 		}),
 	],
 	module: {
@@ -36,6 +35,7 @@ module.exports = {
 				use: {
 					loader: "babel-loader",
 					options: {
+						cacheDirectory: true,
 						presets: [["@babel/env", { modules: false }], "@babel/react"],
 						plugins: [
 							"@babel/plugin-proposal-class-properties",
@@ -45,17 +45,12 @@ module.exports = {
 				},
 			},
 			{
-				test: /\.less/,
-				use: ["style-loader", "css-loader", "less-loader"],
-			},
-			{
 				test: /\.(png|jpg|jpeg|svg|gif|mp3|eot|woff|woff2|ttf)([\\?]?.*)$/,
 				loader: "file-loader",
 				options: {
 					esModule: false,
 					name: "[hash:5].[ext]",
-					publicPath: "./assets",
-					outputPath: "./assets",
+					outputPath: "./asset",
 				},
 			},
 		],
