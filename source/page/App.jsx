@@ -1,11 +1,14 @@
 import React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { BrowserRouter, Redirect, Route } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { selector as authSelector, creator as authCreator } from "../store/auth";
 import { selector as sysSelector } from "../store/system";
 import { Navbar } from "../component/Navbar";
-import { Auth } from "./Auth/index";
+import { Auth } from "./Auth";
+import { Park } from "./Park";
+import { Take } from "./Take";
+import { Info } from "./Info";
 import "./style.less";
 
 const AppView = (props) => {
@@ -13,9 +16,23 @@ const AppView = (props) => {
 
 	return (
 		<BrowserRouter>
-			{!status ? <Redirect to="/auth" /> : <Redirect to="/" />}
-			<Route path="/" exact render={() => <Navbar lang={lang} />} />
-			<Route path="/auth" render={() => <Auth />} />
+			{!status ? (
+				<Route to="/auth" component={Auth} />
+			) : (
+				<>
+					<Navbar lang={lang} />
+					<Switch>
+						<Route path="/" component={Park} exact />
+						<Route path="/park" component={Park} />
+						<Route path="/take" component={Take} />
+						<Route path="/info" component={Info} />
+						<Route path="/recharge" component={Info} />
+						<Route path="/bill" component={Info} />
+						<Route path="/feedback" component={Info} />
+						<Route path="/about" component={Info} />
+					</Switch>
+				</>
+			)}
 		</BrowserRouter>
 	);
 };

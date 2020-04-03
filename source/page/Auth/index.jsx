@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
+import { Redirect } from "react-router-dom";
 import { auth, tip } from "../../util/i18n";
 import { Singup } from "../../component/Login/Signup";
 import { Login } from "../../component/Login/Login";

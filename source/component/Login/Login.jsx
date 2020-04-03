@@ -26,7 +26,7 @@ const Login = (props) => {
 					<label className="mdui-textfield-label">{auth.passwd[lang]}</label>
 					<input
 						className="mdui-textfield-input"
-						type="text"
+						type="password"
 						required
 						value={passwd}
 						onChange={(e) => setPasswd(e.target.value)}
@@ -37,10 +37,7 @@ const Login = (props) => {
 			<div className="btn">
 				<button
 					className="mdui-btn mdui-btn-raised mdui-ripple"
-					onClick={() => {
-						login(email, passwd);
-						console.log(email, passwd);
-					}}
+					onClick={() => login(email, passwd)}
 				>
 					{auth.login[lang]}
 				</button>

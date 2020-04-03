@@ -21,14 +21,16 @@ div.info {
 		}
 	}
 
+	@width: 300px;
+	@height: calc(100vh - 50px - 260px);
+
 	div.body {
-		@width: 290px;
-		@left-1: 17%;
+		@left-1: 18%;
 		@left-2: 30%;
 		@right: 20%;
 
+		height: @height;
 		font-size: 18px;
-		height: calc(100vh - 50px - 260px);
 		display: grid;
 		grid-template-rows: 100px repeat(3, 1fr) 0.6fr;
 		grid-column-gap: 0px;
@@ -150,6 +152,57 @@ div.info {
 				text-decoration: none;
 				border-style: none;
 				margin: 10px;
+			}
+		}
+	}
+
+	.sub {
+		width: @width + 20px;
+		height: @height;
+		position: absolute;
+		left: 50%;
+		transform: translateX(-50%);
+
+		.back {
+			margin: 15px 0;
+			transform: translateX(110%);
+		}
+
+		.item {
+			// bill
+			div table {
+				th,
+				td {
+					text-align: center;
+				}
+			}
+
+			// feedback
+			.feed {
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: center;
+				margin-top: 40px;
+
+				div {
+					width: 250px;
+				}
+			}
+
+			// about
+			.about {
+				width: 280px;
+				margin: auto;
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: center;
+				text-align: center;
+
+				& > div {
+					margin: 5px;
+				}
 			}
 		}
 	}

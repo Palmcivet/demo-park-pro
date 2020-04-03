@@ -1,3 +1,8 @@
+const Base = {
+	proUrl: "http://47.102.149.99:8000",
+	devUrl: "http://localhost",
+};
+
 const url = {
 	signup: "/api/signup",
 	login: "/api/login",
@@ -26,7 +31,7 @@ const handleResponse = (response) => {
 };
 
 const post = (url, data) =>
-	fetch(url, {
+	fetch(Base.proUrl + url, {
 		method: "POST",
 		body: JSON.stringify(data),
 		credentials: "include",

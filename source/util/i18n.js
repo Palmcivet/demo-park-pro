@@ -5,7 +5,7 @@ const sys = {
 	rest: ["Balance:", "钱包余额"],
 	balance: ["Balance: ", "钱包余额："],
 	bill: ["Your Bill", "历史订单"],
-	feedback: ["Feed Back", "咨询客服"],
+	feedback: ["Feed Back", "反馈问题"],
 	about: ["About Us", "关于我们"],
 	recharge: ["Recharge", "充值"],
 };
@@ -17,6 +17,7 @@ const tip = {
 	get_order: ["Get Order", "立即预约"],
 	confirm: ["Confirm", "确认"],
 	cancel: ["Cancel", "取消"],
+	back: ["Back", "返回"],
 	wait: ["Wait", "请稍等"],
 	next: ["Next", "下一步"],
 	prev: ["Prev", "上一步"],
@@ -55,19 +56,21 @@ const park = {
 
 const info = {
 	bill_list: {
-		bill_no: ["Order Number", "订单号"],
-		data: ["Order Data", "订单时间"],
+		bill_no: ["Number", "订单号"],
+		date: ["Date", "订单时间"],
 		size: ["Car Size", "车型"],
 		amount: ["Amount", "金额"],
 		staus: ["Status", "支付状态"],
+		empty: ["You do not have parking bill", "您还没有停车记录"],
 	},
 	feedback: {
 		submit: ["Submit", "提交"],
-		input: ["Your suggestins here.", "请输入您的建议"],
+		input: ["Your suggestins here.", "请输入您的意见或建议"],
 	},
 };
 
 const notify = {
+	getting_order: ["Getting bills", "订单记录请求中"],
 	get_order_failed: ["Get bill failed", "获取历史订单失败"],
 	login_failed: ["Login failed", "登录失败"],
 	feedback_failed: ["Feedback failed", "反馈失败"],
