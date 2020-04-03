@@ -55,10 +55,12 @@ const reducer = (state = initState, action) => {
 		case type.GET_ORDER:
 			return { ...state, bill_list: action.data };
 		default:
-			break;
+			return state;
 	}
 };
 
-const selector = {};
+const selector = {
+	getList: (state) => state.app.bill_list,
+};
 
-export { type, creator, reducer, selector };
+export { initState, type, creator, reducer, selector };

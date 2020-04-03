@@ -44,4 +44,4 @@ const selector = {
 	getShow: (state) => state.sys.isShow,
 };
 
-export { creator, reducer, selector };
+export { initState, creator, reducer, selector };

@@ -4,9 +4,9 @@ import { creator as sysCreator } from "../store/system";
 import { notify } from "../util/i18n";
 
 const initState = {
-	name: "Developer",
-	email: "googleMSapple@gmail.com",
-	balance: "3435.05",
+	name: "",
+	email: "",
+	balance: "",
 };
 
 const type = {
