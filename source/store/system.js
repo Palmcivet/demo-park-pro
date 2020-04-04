@@ -1,7 +1,6 @@
 const initState = {
 	lang: 1,
 	error: "",
-	notify: "",
 	isShow: false,
 	color: "#3f51b5",
 };
@@ -31,8 +30,10 @@ const reducer = (state = initState, action) => {
 		case type.SET_COLOR:
 			return { ...state, color: action.color };
 		case type.SET_ERROR:
+			mdui.snackbar({ message: action.error[action.lang] });
 			return { ...state, error: action.error[action.lang] };
 		case type.SET_NOTIFY:
+			mdui.snackbar({ message: action.error[action.lang] });
 			return state;
 		default:
 			return state;

@@ -42,7 +42,7 @@ const ParkView = (props) => {
 					bottom: "140px",
 					left: "50%",
 					position: "absolute",
-					transform: isShow ? "translate(-50%, 200px)" : "translateX(-50%)",
+					transform: isShow ? "translate(-50%, 250px)" : "translateX(-50%)",
 				}}
 			>
 				<div

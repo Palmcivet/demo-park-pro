@@ -7,9 +7,9 @@ const Feedback = (props) => {
 
 	return (
 		<div className="feed">
-			<div class="mdui-textfield">
+			<div className="mdui-textfield">
 				<textarea
-					class="mdui-textfield-input"
+					className="mdui-textfield-input"
 					rows="4"
 					value={feed}
 					onChange={(e) => setFeed(e.value)}
@@ -21,7 +21,7 @@ const Feedback = (props) => {
 				style={{ color: "#3f51b5" }}
 				onClick={() => feedback(feed)}
 			>
-				{info.feedback.submit[lang] + " "}
+				{info.feedback.submit[lang]}
 			</button>
 		</div>
 	);

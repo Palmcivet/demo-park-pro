@@ -131,6 +131,7 @@ const Steps = (props) => {
 								setCount(count + 1);
 								break;
 							case 2:
+								setCount(count + 1);
 								post(url.other, {
 									token: localStorage.getItem("token"),
 									require: apiType.get_order,
@@ -140,9 +141,6 @@ const Steps = (props) => {
 									if (data.status === 1) {
 										setCount(count + 1);
 									} else if (data.code !== 200) {
-										//* Debug
-										setCount(count + 1);
-										// TODO: 逻辑不清
 										setError(notify.pay_failed[lang]);
 									}
 								});
