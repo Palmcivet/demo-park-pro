@@ -2,14 +2,14 @@ import React, { useState } from "react";
 import { auth } from "../../util/i18n";
 import "./style.less";
 
-const Login = (props) => {
-	const { lang, login } = props;
+const Signin = (props) => {
+	const { lang, signin } = props;
 	const [email, seteEail] = useState("");
 	const [passwd, setPasswd] = useState("");
 
 	return (
 		<>
-			<div className="textfield login" id="tran">
+			<div className="textfield signin" id="tran">
 				<div className="mdui-textfield mdui-textfield-floating-label">
 					<label className="mdui-textfield-label">{auth.email[lang]}</label>
 					<input
@@ -37,13 +37,13 @@ const Login = (props) => {
 			<div className="btn">
 				<button
 					className="mdui-btn mdui-btn-raised mdui-ripple"
-					onClick={() => login(email, passwd)}
+					onClick={() => signin(email, passwd)}
 				>
-					{auth.login[lang]}
+					{auth.signin[lang]}
 				</button>
 			</div>
 		</>
 	);
 };
 
-export { Login };
+export { Signin };

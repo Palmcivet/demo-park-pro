@@ -23,9 +23,9 @@ const creator = {
 			};
 			return post(url.other, postData).then((data) => {
 				if (data.code === 200) {
-					rootStore.dispatch(sysCreator.setError(notify.feedback_success));
+					return dispatch(sysCreator.setError(notify.feedback_success));
 				} else {
-					rootStore.dispatch(sysCreator.setError(notify.feedback_failed));
+					return dispatch(sysCreator.setError(notify.feedback_failed));
 				}
 			});
 		};

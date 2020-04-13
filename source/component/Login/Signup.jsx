@@ -53,7 +53,7 @@ const Singup = (props) => {
 						signup(name, email, passwd);
 					}}
 				>
-					{auth.login[lang]}
+					{auth.signup[lang]}
 				</button>
 			</div>
 		</>

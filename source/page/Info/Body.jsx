@@ -45,7 +45,7 @@ const Body = (props) => {
 			</div>
 			<div className="down">
 				<button className="mdui-ripple" onClick={() => logout()}>
-					{auth.logout[lang]}
+					{auth.signout[lang]}
 				</button>
 			</div>
 		</>

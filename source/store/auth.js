@@ -21,33 +21,40 @@ const creator = {
 				username,
 				email,
 				password,
-			}).then((data) => dispatch(creator.setInfo(data)));
+			}).then((data) => {
+				if (data.code === 200) {
+					dispatch(creator.setInfo(data));
+				} else {
+					rootStore.dispatch(sysCreator.setError(notify.signup_failed));
+				}
+			});
 		};
 	},
-	login: (username, password) => {
+	signin: (email, password) => {
 		return (dispatch) => {
-			return post(url.login, {
-				username,
+			return post(url.signin, {
+				email,
 				password,
-			}).then((data) => dispatch(creator.setInfo(data)));
+			}).then((data) => {
+				if (data.code === 200) {
+					dispatch(creator.setInfo(data));
+				} else {
+					rootStore.dispatch(sysCreator.setError(notify.signin_failed));
+				}
+			});
 		};
 	},
 	logout: () => ({ type: type.LOGOUT }),
-	setInfo: (data) => {
-		if (data.code !== 200) {
-			rootStore.dispatch(sysCreator.setError(notify.login_failed));
-		} else {
-			return {
-				type: type.SETINFO,
-				data: data,
-			};
-		}
-	},
+	setInfo: (data) => ({
+		type: type.SETINFO,
+		data,
+	}),
 };
 
 const reducer = (state = initState, action) => {
 	switch (action.type) {
 		case type.LOGOUT:
+			window.location = "/";
 			return { ...state, name: "", email: "", balance: "0.00" };
 		case type.SETINFO:
 			localStorage.setItem("token", action.data.token);

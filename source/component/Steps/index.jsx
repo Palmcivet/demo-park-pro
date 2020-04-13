@@ -141,7 +141,7 @@ const Steps = (props) => {
 									if (data.status === 1) {
 										setCount(count + 1);
 									} else if (data.code !== 200) {
-										setError(notify.pay_failed[lang]);
+										setError(notify.pay_failed);
 									}
 								});
 								break;

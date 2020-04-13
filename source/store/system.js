@@ -1,3 +1,5 @@
+import { rootStore } from "./configuration";
+
 const initState = {
 	lang: 1,
 	error: "",
@@ -15,10 +17,18 @@ const type = {
 
 const creator = {
 	toggleShow: () => ({ type: type.TOGGLE_SHOW }),
-	setLang: (lang) => ({ type: type.SET_LANGUAGE, lang: lang }),
-	setColor: (color) => ({ type: type.SET_COLOR, color: color }),
-	setError: (error) => ({ type: type.SET_ERROR, error: error }),
-	setNotify: (notice) => ({ type: type.SET_NOTIFY, notice: notice }),
+	setLang: (lang) => ({ type: type.SET_LANGUAGE, lang }),
+	setColor: (color) => ({ type: type.SET_COLOR, color }),
+	setError: (error) => {
+		let state = rootStore.getState();
+		let lang = state.sys.lang;
+		return { type: type.SET_ERROR, error: error[lang] };
+	},
+	setNotify: (notice) => {
+		let state = rootStore.getState();
+		let lang = state.sys.lang;
+		return { type: type.SET_NOTIFY, notice: notice[lang] };
+	},
 };
 
 const reducer = (state = initState, action) => {
@@ -30,10 +40,10 @@ const reducer = (state = initState, action) => {
 		case type.SET_COLOR:
 			return { ...state, color: action.color };
 		case type.SET_ERROR:
-			mdui.snackbar({ message: action.error[action.lang] });
-			return { ...state, error: action.error[action.lang] };
+			mdui.snackbar({ message: action.error });
+			return { ...state, error: action.error };
 		case type.SET_NOTIFY:
-			mdui.snackbar({ message: action.error[action.lang] });
+			mdui.snackbar({ message: action.error });
 			return state;
 		default:
 			return state;

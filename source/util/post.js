@@ -4,8 +4,8 @@ const Base = {
 };
 
 const url = {
-	signup: "/api/signin",
-	login: "/api/login",
+	signin: "/api/signin",
+	signup: "/api/signup",
 	other: "/api/verifytoken",
 };
 
@@ -16,10 +16,7 @@ const apiType = {
 };
 
 const headers = new Headers({
-	Accept: "application/json",
-	"Access-Control-Allow-Origin": "*",
 	"Content-Type": "application/x-www-form-urlencoded",
-	mode: "cors",
 });
 
 const handleResponse = (response) => {
@@ -33,40 +30,17 @@ const handleResponse = (response) => {
 };
 
 const post = (url, data) =>
-	fetch(Base.devUrl + url, {
+	fetch(Base.proUrl + url, {
 		method: "POST",
 		body: JSON.stringify(data),
 		credentials: "include",
 		headers: headers,
+		mode: "cors",
 	})
 		.then((response) => handleResponse(response))
 		.catch((err) => {
 			console.error(`Nerwork failed: ${err}`);
 			return { error: { msg: "Request error." } };
 		});
-
-const request = (url, data) => {
-	let xhr = new XMLHttpRequest();
-	xhr.open("post", Base.proUrl + url, true);
-	xhr.setRequestHeader("content-type", "application/json");
-	xhr.responseType = "application/json";
-	xhr.withCredentials = true;
-	xhr.timeout = 2000;
-
-	return new Promise(
-		() => {
-			xhr.send(JSON.stringify(data));
-			xhr.onreadystatechange = () => {
-				if (xhr.readyState === 4) {
-					return handleResponse(xhr.responseText);
-				}
-			};
-		},
-		(err) => {
-			console.error(`Nerwork failed: ${err}`);
-			return { error: { msg: "Request error." } };
-		}
-	);
-};
 
 export { apiType, url, post };

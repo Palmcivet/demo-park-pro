@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { auth, tip } from "../../util/i18n";
 import { Singup } from "../../component/Login/Signup";
-import { Login } from "../../component/Login/Login";
+import { Signin } from "../../component/Login/Signin";
 import { Lang } from "../../component/Lang";
 import { selector as authSelector, creator as authCreator } from "../../store/auth";
 import { selector as sysSelector, creator as sysCreator } from "../../store/system";
@@ -25,7 +25,7 @@ const AuthView = (props) => {
 			<Lang lang={lang} offColor="rgb(77, 77, 77)" toggle={setLang} />
 			{isSign ? (
 				<>
-					<Login {...props} />
+					<Signin {...props} />
 					<div className="tipbox">
 						<a>{auth.forget_passwd[lang]}</a>
 						<a onClick={() => setIsSign(!isSign)}>{auth.no_account[lang]}</a>
