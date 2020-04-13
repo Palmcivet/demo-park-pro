@@ -3,8 +3,8 @@ import { auth } from "../../util/i18n";
 import "./style.less";
 
 const Signin = (props) => {
-	const { lang, signin } = props;
-	const [email, seteEail] = useState("");
+	const { lang, signin, setError } = props;
+	const [email, setEail] = useState("");
 	const [passwd, setPasswd] = useState("");
 
 	return (
@@ -17,9 +17,8 @@ const Signin = (props) => {
 						type="email"
 						required
 						value={email}
-						onChange={(e) => seteEail(e.target.value)}
+						onChange={(e) => setEail(e.target.value)}
 					/>
-					<div className="mdui-textfield-error">{auth.invalid_email[lang]}</div>
 				</div>
 
 				<div className="mdui-textfield mdui-textfield-floating-label">
@@ -31,13 +30,23 @@ const Signin = (props) => {
 						value={passwd}
 						onChange={(e) => setPasswd(e.target.value)}
 					/>
-					<div className="mdui-textfield-error">{auth.empty_passwd[lang]}</div>
 				</div>
 			</div>
 			<div className="btn">
 				<button
 					className="mdui-btn mdui-btn-raised mdui-ripple"
-					onClick={() => signin(email, passwd)}
+					onClick={() => {
+						if (
+							email === "" ||
+							!/^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/.test(
+								email
+							)
+						) {
+							setError(auth.invalid_email);
+						} else {
+							signin(email, passwd);
+						}
+					}}
 				>
 					{auth.signin[lang]}
 				</button>

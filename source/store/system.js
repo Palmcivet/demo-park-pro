@@ -40,7 +40,11 @@ const reducer = (state = initState, action) => {
 		case type.SET_COLOR:
 			return { ...state, color: action.color };
 		case type.SET_ERROR:
-			mdui.snackbar({ message: action.error });
+			mdui.snackbar({
+				message: action.error,
+				timeout: 2000,
+				position: "top",
+			});
 			return { ...state, error: action.error };
 		case type.SET_NOTIFY:
 			mdui.snackbar({ message: action.error });

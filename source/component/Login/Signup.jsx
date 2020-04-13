@@ -3,10 +3,11 @@ import { auth } from "../../util/i18n";
 import "./style.less";
 
 const Singup = (props) => {
-	const { lang, signup } = props;
-	const [name, seteName] = useState("");
-	const [email, seteEail] = useState("");
+	const { lang, signup, setError } = props;
+	const [name, setName] = useState("");
+	const [email, setEail] = useState("");
 	const [passwd, setPasswd] = useState("");
+	const [phone, setPhone] = useState("");
 
 	return (
 		<>
@@ -18,9 +19,8 @@ const Singup = (props) => {
 						type="text"
 						required
 						value={name}
-						onChange={(e) => seteName(e.target.value)}
+						onChange={(e) => setName(e.target.value)}
 					/>
-					<div className="mdui-textfield-error">{auth.empty_name[lang]}</div>
 				</div>
 				<div className="mdui-textfield mdui-textfield-floating-label">
 					<label className="mdui-textfield-label">{auth.email[lang]}</label>
@@ -29,28 +29,50 @@ const Singup = (props) => {
 						type="email"
 						required
 						value={email}
-						onChange={(e) => seteEail(e.target.value)}
+						onChange={(e) => setEail(e.target.value)}
 					/>
-					<div className="mdui-textfield-error">{auth.invalid_email[lang]}</div>
+				</div>
+				<div className="mdui-textfield mdui-textfield-floating-label">
+					<label className="mdui-textfield-label">{auth.phone[lang]}</label>
+					<input
+						className="mdui-textfield-input"
+						type="tel"
+						required
+						value={phone}
+						onChange={(e) => setPhone(e.target.value)}
+					/>
 				</div>
 				<div className="mdui-textfield mdui-textfield-floating-label">
 					<label className="mdui-textfield-label">{auth.passwd[lang]}</label>
 					<input
 						className="mdui-textfield-input"
 						type="password"
-						pattern="^.*(?=.{6,})(?=.*[a-z])(?=.*[A-Z]).*$"
 						required
 						value={passwd}
 						onChange={(e) => setPasswd(e.target.value)}
 					/>
-					<div className="mdui-textfield-error">{auth.empty_passwd[lang]}</div>
 				</div>
 			</div>
 			<div className="btn">
 				<button
 					className="mdui-btn mdui-btn-raised mdui-ripple"
 					onClick={() => {
-						signup(name, email, passwd);
+						if (name === "") {
+							setError(auth.empty_name);
+						} else if (
+							email === "" ||
+							!/^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/.test(
+								email
+							)
+						) {
+							setError(auth.invalid_email);
+						} else if (passwd === "") {
+							setError(auth.empty_passwd);
+						} else if (phone === "" || !/^([1-9])([0-9]+)/.test(phone)) {
+							setError(auth.invalid_phone);
+						} else {
+							signup(name, email, phone, passwd);
+						}
 					}}
 				>
 					{auth.signup[lang]}

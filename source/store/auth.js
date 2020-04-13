@@ -6,24 +6,25 @@ import { notify } from "../util/i18n";
 const initState = {
 	name: "",
 	email: "",
-	balance: "",
+	balance: 0,
 };
 
 const type = {
-	LOGOUT: "LOGOUT",
+	SIGNOUT: "SIGNOUT",
 	SETINFO: "SETINFO",
 };
 
 const creator = {
-	signup: (username, email, password) => {
+	signup: (name, email, phone, password) => {
 		return (dispatch) => {
 			return post(url.signup, {
-				username,
+				name,
 				email,
+				phone,
 				password,
 			}).then((data) => {
 				if (data.code === 200) {
-					dispatch(creator.setInfo(data));
+					dispatch(creator.setInfo({ name, email, balance: 0, ...data }));
 				} else {
 					rootStore.dispatch(sysCreator.setError(notify.signup_failed));
 				}
@@ -44,7 +45,7 @@ const creator = {
 			});
 		};
 	},
-	logout: () => ({ type: type.LOGOUT }),
+	signout: () => ({ type: type.SIGNOUT }),
 	setInfo: (data) => ({
 		type: type.SETINFO,
 		data,
@@ -53,9 +54,10 @@ const creator = {
 
 const reducer = (state = initState, action) => {
 	switch (action.type) {
-		case type.LOGOUT:
+		case type.SIGNOUT:
 			window.location = "/";
-			return { ...state, name: "", email: "", balance: "0.00" };
+			localStorage.removeItem("token");
+			return { ...state, name: "", email: "" };
 		case type.SETINFO:
 			localStorage.setItem("token", action.data.token);
 			return {

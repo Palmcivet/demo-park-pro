@@ -7,8 +7,8 @@ import "./style.less";
 const Steps = (props) => {
 	const { lang, isShow, balance, toggleShow, setError } = props;
 	const [count, setCount] = useState(1);
-	const [time, setTime] = useState("1");
 	const [size, setSize] = useState(park.model.small[lang]);
+	const [fee, setFee] = useState(10);
 	mdui.mutation();
 
 	return (
@@ -42,21 +42,15 @@ const Steps = (props) => {
 				</div>
 				<div style={{ marginTop: "18px" }}>
 					<label>{park.prompt.choose_model[lang]}</label>
-					<select className="mdui-select" mdui-select="{position: 'top'}">
+					<select
+						id="demo-js"
+						className="mdui-select"
+						mdui-select="{position: 'top'}"
+					>
 						<option value="1">{park.model.small[lang]}</option>
 						<option value="2">{park.model.middle[lang]}</option>
 						<option value="3">{park.model.large[lang]}</option>
 					</select>
-				</div>
-				<div style={{ marginTop: "8px" }}>
-					<label>{park.prompt.choose_time_t[lang]}</label>
-					<select className="mdui-select" mdui-select="{position: 'bottom'}">
-						<option value="1">1</option>
-						<option value="2">2</option>
-						<option value="3">3</option>
-						<option value="4">4</option>
-					</select>
-					<label>{park.prompt.choose_time_u[lang]}</label>
 				</div>
 			</div>
 			{/* 确认、支付 */}
@@ -67,13 +61,12 @@ const Steps = (props) => {
 				<label>{park.prompt.confirm[lang]}</label>
 				<ul className="mdui-list">
 					<li className="mdui-list-item mdui-ripple">
-						🚘{park.prompt.choose_model[lang]}
+						🚘 {park.prompt.choose_model[lang]}
 						{size}
 					</li>
 					<li className="mdui-list-item mdui-ripple">
-						⏰{park.prompt.choose_time_t[lang]}
-						{time + " "}
-						{park.prompt.choose_time_u[lang]}
+						💰 {park.prompt.price_pay[lang]}
+						{fee}
 					</li>
 				</ul>
 				<label className="balance">
@@ -123,20 +116,17 @@ const Steps = (props) => {
 										"mdui-select-selected"
 									)[0].innerHTML
 								);
-								setTime(
-									document.getElementsByClassName(
-										"mdui-select-selected"
-									)[1].innerHTML
-								);
+								let inst = mdui.Select("#demo-js").value;
+								setFee(5 + parseInt(inst) * 5);
 								setCount(count + 1);
 								break;
 							case 2:
 								setCount(count + 1);
 								post(url.other, {
 									token: localStorage.getItem("token"),
-									require: apiType.get_order,
+									require: apiType.add_order,
 									car_size: size,
-									time: time,
+									price: fee,
 								}).then((data) => {
 									if (data.status === 1) {
 										setCount(count + 1);

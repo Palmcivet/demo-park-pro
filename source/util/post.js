@@ -16,12 +16,11 @@ const apiType = {
 };
 
 const headers = new Headers({
-	"Content-Type": "application/x-www-form-urlencoded",
+	"Content-Type": "application/json",
 });
 
 const handleResponse = (response) => {
 	if (response.status < 400) {
-		console.log(response);
 		return response.json();
 	} else {
 		console.error(`Server error: ${response.statusText}`);

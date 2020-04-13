@@ -15,7 +15,7 @@ import { tip } from "../../util/i18n";
 import "./style.less";
 
 const InfoView = (props) => {
-	const { lang, name, email, bill_list, setLang, get_order, match } = props;
+	const { lang, name, email, setLang, match } = props;
 	let CompSub = null;
 
 	switch (match.path) {
@@ -31,10 +31,6 @@ const InfoView = (props) => {
 		case "/recharge":
 			CompSub = Recharge;
 			break;
-	}
-
-	if (bill_list === []) {
-		get_order();
 	}
 
 	return (

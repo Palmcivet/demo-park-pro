@@ -4,6 +4,9 @@ import { info } from "../../util/i18n";
 const Bill = (props) => {
 	const { lang, bill_list } = props;
 	mdui.mutation();
+	if (bill_list === []) {
+		get_order();
+	}
 
 	if (bill_list.length === 0) {
 		return (

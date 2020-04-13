@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { auth, sys } from "../../util/i18n";
 
 const Body = (props) => {
-	const { lang, balance, logout } = props;
+	const { lang, balance, signout } = props;
 
 	return (
 		<>
@@ -13,17 +13,8 @@ const Body = (props) => {
 				<Link to="/recharge">
 					{/* 字符串格式，"81.02" "34" */}
 					<label>¥</label>
-					<label>
-						{balance.indexOf(".") === -1
-							? balance
-							: balance.slice(0, balance.indexOf("."))}
-					</label>
-					<label>
-						.{/* 字符串 -> 数值(精度 2) -> 字符串("."') */}
-						{parseFloat(balance)
-							.toFixed(2)
-							.slice(balance.indexOf(".") + 1)}
-					</label>
+					<label>{Math.floor(balance / 100).toString()}</label>
+					<label>.{("00" + (balance % 100)).slice(-2)}</label>
 				</Link>
 			</div>
 			<div className="card mid">
@@ -44,7 +35,7 @@ const Body = (props) => {
 				</Link>
 			</div>
 			<div className="down">
-				<button className="mdui-ripple" onClick={() => logout()}>
+				<button className="mdui-ripple" onClick={() => signout()}>
 					{auth.signout[lang]}
 				</button>
 			</div>

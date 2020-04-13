@@ -36,7 +36,7 @@ const testStore = {
 	auth: {
 		name: "Developer",
 		email: "googleMSapple@gmail.com",
-		balance: "343.05",
+		balance: 999999,
 	},
 	app: {
 		bill_list: [
@@ -57,6 +57,7 @@ const testStore = {
 	},
 };
 
+// const rootStore = configureStore(testStore);
 const rootStore = configureStore(initStore);
 
 export { rootStore };

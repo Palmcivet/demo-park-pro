@@ -25,7 +25,8 @@ const tip = {
 
 const auth = {
 	name: ["Name", "名称"],
-	email: ["Email", "邮件"],
+	email: ["Email", "邮箱"],
+	phone: ["Phone", "手机号"],
 	passwd: ["Password", "密码"],
 	signup: ["Signup", "注册"],
 	signin: ["Signin", "登录"],
@@ -34,7 +35,8 @@ const auth = {
 	no_account: ["Goto Signup", "注册账号"],
 	empty_name: ["Empty name", "用户名为空"],
 	empty_passwd: ["Empty password", "密码为空"],
-	invalid_email: ["Invalid email", "格式错误"],
+	invalid_phone: ["Iinvalid phone", "手机号错误"],
+	invalid_email: ["Invalid email", "邮箱错误"],
 };
 
 const park = {
@@ -46,8 +48,7 @@ const park = {
 	prompt: {
 		intro: ["Reference Value", "参 考 数 值"],
 		choose_model: ["Your model:", "您的车型："],
-		choose_time_t: ["Interval:", "停车时间："],
-		choose_time_u: ["Hour", "小时"],
+		price_pay: ["Parking fee:", "需停车费："],
 		confirm: ["Confirm your choices", "请确认您的选择"],
 		please_wait: ["Scheduling, wait please", "正在为您调度车位，请稍等"],
 		get_note: ["This is your note", "调度结果"],
@@ -76,6 +77,7 @@ const notify = {
 	signup_failed: ["signup failed", "注册失败"],
 	feedback_failed: ["Feedback failed", "反馈失败"],
 	feedback_success: ["Feedback Success", "反馈成功"],
+	empty_content: ["Empty Content", "内容为空"],
 	pay_failed: ["Pay failed", "支付失败"],
 };
 
