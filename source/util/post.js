@@ -4,7 +4,7 @@ const Base = {
 };
 
 const url = {
-	signup: "/api/signup",
+	signup: "/api/signin",
 	login: "/api/login",
 	other: "/api/verifytoken",
 };
@@ -17,12 +17,14 @@ const apiType = {
 
 const headers = new Headers({
 	Accept: "application/json",
-	"Content-Type": "application/json",
+	"Access-Control-Allow-Origin": "*",
+	"Content-Type": "application/x-www-form-urlencoded",
 	mode: "cors",
 });
 
 const handleResponse = (response) => {
 	if (response.status < 400) {
+		console.log(response);
 		return response.json();
 	} else {
 		console.error(`Server error: ${response.statusText}`);
@@ -31,7 +33,7 @@ const handleResponse = (response) => {
 };
 
 const post = (url, data) =>
-	fetch(Base.proUrl + url, {
+	fetch(Base.devUrl + url, {
 		method: "POST",
 		body: JSON.stringify(data),
 		credentials: "include",
@@ -42,5 +44,29 @@ const post = (url, data) =>
 			console.error(`Nerwork failed: ${err}`);
 			return { error: { msg: "Request error." } };
 		});
+
+const request = (url, data) => {
+	let xhr = new XMLHttpRequest();
+	xhr.open("post", Base.proUrl + url, true);
+	xhr.setRequestHeader("content-type", "application/json");
+	xhr.responseType = "application/json";
+	xhr.withCredentials = true;
+	xhr.timeout = 2000;
+
+	return new Promise(
+		() => {
+			xhr.send(JSON.stringify(data));
+			xhr.onreadystatechange = () => {
+				if (xhr.readyState === 4) {
+					return handleResponse(xhr.responseText);
+				}
+			};
+		},
+		(err) => {
+			console.error(`Nerwork failed: ${err}`);
+			return { error: { msg: "Request error." } };
+		}
+	);
+};
 
 export { apiType, url, post };

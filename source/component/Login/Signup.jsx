@@ -37,7 +37,7 @@ const Singup = (props) => {
 					<label className="mdui-textfield-label">{auth.passwd[lang]}</label>
 					<input
 						className="mdui-textfield-input"
-						type="text"
+						type="password"
 						pattern="^.*(?=.{6,})(?=.*[a-z])(?=.*[A-Z]).*$"
 						required
 						value={passwd}
@@ -51,7 +51,6 @@ const Singup = (props) => {
 					className="mdui-btn mdui-btn-raised mdui-ripple"
 					onClick={() => {
 						signup(name, email, passwd);
-						console.log(name, email, passwd);
 					}}
 				>
 					{auth.login[lang]}

@@ -14,6 +14,8 @@
 design.md
 interface.md
 /.github/*
+/**/*.zip
+/**/*.rar
 
 # misc
 .DS_Store

@@ -57,6 +57,6 @@ const testStore = {
 	},
 };
 
-const rootStore = configureStore(testStore);
+const rootStore = configureStore(initStore);
 
 export { rootStore };
