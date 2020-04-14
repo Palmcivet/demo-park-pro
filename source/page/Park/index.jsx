@@ -10,6 +10,7 @@ import "./style.less";
 
 const ParkView = (props) => {
 	const { lang, isShow } = props;
+	document.getElementById("content").style.visibility = "hidden";
 
 	return (
 		<div className="park">

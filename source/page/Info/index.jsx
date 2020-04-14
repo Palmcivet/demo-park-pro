@@ -16,6 +16,7 @@ import "./style.less";
 
 const InfoView = (props) => {
 	const { lang, name, email, setLang, match } = props;
+	document.getElementById("content").style.visibility = "hidden";
 	let CompSub = null;
 
 	switch (match.path) {

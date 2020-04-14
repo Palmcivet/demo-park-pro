@@ -43,6 +43,8 @@ const Signin = (props) => {
 							)
 						) {
 							setError(auth.invalid_email);
+						} else if (passwd === "") {
+							setError(auth.empty_passwd);
 						} else {
 							signin(email, passwd);
 						}

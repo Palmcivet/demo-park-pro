@@ -9,13 +9,13 @@
 /coverage
 
 # production
+/**/*.zip
+/**/*.rar
+/**/*.map
 /public
 /design
 design.md
 interface.md
-/.github/*
-/**/*.zip
-/**/*.rar
 
 # misc
 .DS_Store
