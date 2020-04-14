@@ -2,13 +2,14 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { tip, park, sys, notify } from "../../util/i18n";
 import { post, url, apiType } from "../../util/post";
+const pay = require("../../../static/image/pay.png");
 import "./style.less";
 
 const Steps = (props) => {
-	const { lang, isShow, balance, toggleShow, setError } = props;
+	const { lang, isShow, balance, toggleShow, setError, history } = props;
 	const [count, setCount] = useState(1);
-	const [size, setSize] = useState(park.model.small[lang]);
-	const [fee, setFee] = useState(10);
+	const [size, setSize] = useState(1);
+	const [price, setPrice] = useState(10);
 	mdui.mutation();
 
 	return (
@@ -62,16 +63,21 @@ const Steps = (props) => {
 				<ul className="mdui-list">
 					<li className="mdui-list-item mdui-ripple">
 						🚘 {park.prompt.choose_model[lang]}
-						{size}
+						{size === 1
+							? park.model.small[lang]
+							: size === 2
+							? park.model.middle[lang]
+							: park.model.large[lang]}
 					</li>
 					<li className="mdui-list-item mdui-ripple">
-						💰 {park.prompt.price_pay[lang]}
-						{fee}
+						💰 {park.prompt.price_pay[lang]}¥ {price}
+					</li>
+					<li className="mdui-list-item mdui-ripple">
+						⏰ {park.prompt.time[lang]}1 {lang === 0 ? "Hour" : "小时"}
 					</li>
 				</ul>
 				<label className="balance">
-					{sys.balance[lang]}
-					{parseFloat(balance).toFixed(2)}
+					{sys.balance[lang]}¥ {parseFloat(balance / 100)}
 				</label>
 				<Link to="/recharge">{sys.recharge[lang]}</Link>
 			</div>
@@ -85,8 +91,8 @@ const Steps = (props) => {
 			</div>
 			{/* 结果 */}
 			<div style={{ display: count === 4 ? "flex" : "none" }} className="dialog-4">
-				<label>{park.prompt.get_note[lang]}</label>
-				<div>{}</div>
+				<img src={pay}></img>
+				<label>{notify.pay_success[lang]}</label>
 			</div>
 
 			<div className="btngroup">
@@ -117,21 +123,23 @@ const Steps = (props) => {
 									)[0].innerHTML
 								);
 								let inst = mdui.Select("#demo-js").value;
-								setFee(5 + parseInt(inst) * 5);
-								setCount(count + 1);
+								setPrice(5 + parseInt(inst) * 5);
+								setSize(parseInt(inst));
+								setCount(2);
 								break;
 							case 2:
-								setCount(count + 1);
+								setCount(3);
 								post(url.other, {
 									token: localStorage.getItem("token"),
 									require: apiType.add_order,
-									car_size: size,
-									price: fee,
+									size,
+									price,
 								}).then((data) => {
-									if (data.status === 1) {
-										setCount(count + 1);
-									} else if (data.code !== 200) {
+									if (data.code === 200) {
+										setCount(4);
+									} else {
 										setError(notify.pay_failed);
+										setCount(2);
 									}
 								});
 								break;

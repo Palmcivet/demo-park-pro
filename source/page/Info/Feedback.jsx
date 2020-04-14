@@ -24,7 +24,6 @@ const Feedback = (props) => {
 						setError(notify.empty_content);
 					} else {
 						feedback(feed);
-						console.log(feed);
 					}
 				}}
 			>

@@ -1,6 +1,6 @@
 const sys = {
+	order: ["Order", "预约"],
 	park: ["Park", "停车"],
-	take: ["Take", "取车"],
 	info: ["Info", "我的"],
 	rest: ["Balance:", "钱包余额"],
 	balance: ["Balance: ", "钱包余额："],
@@ -13,7 +13,7 @@ const sys = {
 const tip = {
 	greeting_1: ["Welcome to Park Pro", "欢迎来到 Park Pro"],
 	greeting_2: ['Click "Get Order" Please', "请点击“立即预约”开始使用"],
-	greeting_3: ["Order Place", "预约车位"],
+	greeting_3: ["Order Place", "预 约 车 位"],
 	get_order: ["Get Order", "立即预约"],
 	confirm: ["Confirm", "确认"],
 	cancel: ["Cancel", "取消"],
@@ -47,21 +47,21 @@ const park = {
 	},
 	prompt: {
 		intro: ["Reference Value", "参 考 数 值"],
-		choose_model: ["Your model:", "您的车型："],
-		price_pay: ["Parking fee:", "需停车费："],
-		confirm: ["Confirm your choices", "请确认您的选择"],
-		please_wait: ["Scheduling, wait please", "正在为您调度车位，请稍等"],
-		get_note: ["This is your note", "调度结果"],
+		choose_model: ["Your Model: ", "您的车型："],
+		price_pay: ["Parking Fee: ", "需停车费："],
+		time: ["Parking Time: ", "停车时间："],
+		confirm: ["Confirm Your Choices", "请确认您的选择"],
+		please_wait: ["Scheduling, Wait Please", "正在为您调度车位，请稍等"],
 	},
 };
 
 const info = {
 	bill_list: {
 		bill_no: ["Number", "订单号"],
-		date: ["Date", "订单时间"],
+		date: ["Order Date", "订单时间"],
 		size: ["Car Size", "车型"],
 		amount: ["Amount", "金额"],
-		staus: ["Status", "支付状态"],
+		staus: ["Status", "状态"],
 		empty: ["You do not have parking bill", "您还没有停车记录"],
 	},
 	feedback: {
@@ -71,14 +71,15 @@ const info = {
 };
 
 const notify = {
-	getting_order: ["Getting bills", "订单记录请求中"],
-	get_order_failed: ["Get bill failed", "获取历史订单失败"],
-	signin_failed: ["signin failed", "登录失败"],
-	signup_failed: ["signup failed", "注册失败"],
-	feedback_failed: ["Feedback failed", "反馈失败"],
+	getting_order: ["Fetching Bills", "订单记录请求中"],
+	get_order_failed: ["Fetch Failed", "获取历史订单失败"],
+	signin_failed: ["signin Failed", "登录失败"],
+	signup_failed: ["signup Failed", "注册失败"],
+	feedback_failed: ["Feedback Failed", "反馈失败"],
 	feedback_success: ["Feedback Success", "反馈成功"],
 	empty_content: ["Empty Content", "内容为空"],
-	pay_failed: ["Pay failed", "支付失败"],
+	pay_failed: ["Pay Failed", "支付失败"],
+	pay_success: ["Order Success", "预 约 成 功"],
 };
 
 export { sys, tip, park, auth, info, notify };

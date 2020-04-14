@@ -21,8 +21,8 @@ const AuthView = (props) => {
 
 	return (
 		<div className="authbox">
-			<img className="logo" src={logo}></img>
 			<Lang lang={lang} offColor="rgb(77, 77, 77)" toggle={setLang} />
+			<img className="logo" src={logo}></img>
 			{isSign ? (
 				<>
 					<Signin {...props} />

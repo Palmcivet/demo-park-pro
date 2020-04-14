@@ -2,13 +2,11 @@ import React from "react";
 import { info } from "../../util/i18n";
 
 const Bill = (props) => {
-	const { lang, bill_list } = props;
+	const { lang, bill_list, get_order } = props;
 	mdui.mutation();
-	if (bill_list === []) {
-		get_order();
-	}
 
 	if (bill_list.length === 0) {
+		get_order();
 		return (
 			<div
 				style={{
@@ -30,19 +28,19 @@ const Bill = (props) => {
 				<table className="mdui-table mdui-table-hoverable">
 					<thead>
 						<tr>
-							<th style={{ padding: "4px 6px" }}>
+							<th style={{ padding: "4px 3px" }}>
 								{info.bill_list.bill_no[lang]}
 							</th>
-							<th style={{ padding: "4px 6px" }}>
+							<th style={{ padding: "4px 3px" }}>
 								{info.bill_list.date[lang]}
 							</th>
-							<th style={{ padding: "4px 6px" }}>
+							<th style={{ padding: "4px 3px" }}>
 								{info.bill_list.size[lang]}
 							</th>
-							<th style={{ padding: "4px 6px" }}>
+							<th style={{ padding: "4px 3px" }}>
 								{info.bill_list.amount[lang]}
 							</th>
-							<th style={{ padding: "4px 6px" }}>
+							<th style={{ padding: "4px 3px" }}>
 								{info.bill_list.staus[lang]}
 							</th>
 						</tr>
@@ -50,11 +48,11 @@ const Bill = (props) => {
 					<tbody>
 						{bill_list.map((item, i) => (
 							<tr key={i}>
-								<td style={{ padding: "4px 6px" }}>{item[0]}</td>
-								<td style={{ padding: "4px 6px" }}>{item[1]}</td>
-								<td style={{ padding: "4px 6px" }}>{item[2]}</td>
-								<td style={{ padding: "4px 6px" }}>{item[3]}</td>
-								<td style={{ padding: "4px 6px" }}>{item[4]}</td>
+								<td style={{ padding: "4px 3px" }}>{item[0]}</td>
+								<td style={{ padding: "4px 3px" }}>{item[1]}</td>
+								<td style={{ padding: "4px 3px" }}>{item[2]}</td>
+								<td style={{ padding: "4px 3px" }}>{item[3]}</td>
+								<td style={{ padding: "4px 3px" }}>{item[4]}</td>
 							</tr>
 						))}
 					</tbody>
