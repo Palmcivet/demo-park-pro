@@ -37,11 +37,13 @@ const creator = {
 				email,
 				password,
 			}).then((data) => {
-				if (data.code === 200) {
-					dispatch(creator.setInfo(data));
-				} else {
-					rootStore.dispatch(sysCreator.setError(notify.signin_failed));
-				}
+				dispatch(creator.setInfo(data));
+
+				// if (data.code === 200) {
+				// 	dispatch(creator.setInfo(data));
+				// } else {
+				// 	rootStore.dispatch(sysCreator.setError(notify.signin_failed));
+				// }
 			});
 		};
 	},
